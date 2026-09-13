@@ -1,0 +1,34 @@
+{
+  "name": "playwright-typescript-saucedemo-automation",
+  "version": "1.0.0",
+  "description": "UI test automation framework built with Playwright and TypeScript covering login, products, cart and checkout scenarios using Page Object Model.",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PetarGinev/Playwright-TypeScript-SauceDemo-Automation.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PetarGinev/Playwright-TypeScript-SauceDemo-Automation/issues"
+  },
+  "homepage": "https://github.com/PetarGinev/Playwright-TypeScript-SauceDemo-Automation#readme",
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.61.1",
+    "@types/node": "^26.5.1",
+    "eslint": "^10.8.0",
+    "globals": "^17.7.0",
+    "jiti": "^2.7.0",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.65.0"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2"
+  }
+}
