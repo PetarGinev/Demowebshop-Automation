@@ -10,7 +10,7 @@ export const LOGIN_VALIDATION_SUMMARY = '.validation-summary-errors';
 
 export const HEADER_LOGIN_LINK = '.ico-login';
 export const HEADER_LOGOUT_LINK = '.ico-logout';
-export const HEADER_ACCOUNT_LINK = '.account';
+export const HEADER_ACCOUNT_LINK = '.header-links .account';
 export const HEADER_REGISTER_LINK = '.ico-register';
 export const FORGOT_PASSWORD_LINK = '.forgot-password a';
 
