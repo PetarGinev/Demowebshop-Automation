@@ -33,7 +33,7 @@ test.describe('Category & Product Pages test suite', () => {
     await TC41(page);
   });
 
-  test.only('TC55 - Breadcrumb link on a product page navigates back to its category', async ({ page }) => {
+  test('TC55 - Breadcrumb link on a product page navigates back to its category', async ({ page }) => {
     await TC55(page);
   });
 
