@@ -1,8 +1,7 @@
 import { Page, expect } from '@playwright/test';
 import { searchForProduct } from '../helpers/search';
 import { addProductToCartFromGrid, goToCartPage, updateCartItemQuantity, getCartItemQuantityValue } from '../helpers/cart';
-
-const PRODUCT_NAME = '14.1-inch Laptop';
+import { PRODUCT_NAME_LAPTOP, PRODUCT_SEARCH_LAPTOP } from '../helpers/product';
 
 /**
  * TC50 (negative) - Setting a cart line item's quantity to a negative
@@ -11,13 +10,13 @@ const PRODUCT_NAME = '14.1-inch Laptop';
  */
 export async function TC50(page: Page) {
   await page.goto('/');
-  await searchForProduct(page, 'laptop');
-  await addProductToCartFromGrid(page, PRODUCT_NAME);
+  await searchForProduct(page, PRODUCT_SEARCH_LAPTOP);
+  await addProductToCartFromGrid(page, PRODUCT_NAME_LAPTOP);
   await goToCartPage(page);
 
-  await updateCartItemQuantity(page, PRODUCT_NAME, -1);
+  await updateCartItemQuantity(page, PRODUCT_NAME_LAPTOP, -1);
 
-  const quantityAfter = await getCartItemQuantityValue(page, PRODUCT_NAME);
+  const quantityAfter = await getCartItemQuantityValue(page, PRODUCT_NAME_LAPTOP);
   const hasValidationError = await page.locator('.field-validation-error, .message-error').count();
 
   expect(quantityAfter === 0 || hasValidationError === 0).toBe(true);

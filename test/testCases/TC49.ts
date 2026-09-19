@@ -1,8 +1,7 @@
 import { Page, expect } from '@playwright/test';
 import { searchForProduct } from '../helpers/search';
 import { addProductToCartFromGrid, goToCartPage, getCartItemQuantityValue, getCartQuantityBadge, CART_ROW } from '../helpers/cart';
-
-const PRODUCT_NAME = '14.1-inch Laptop';
+import { PRODUCT_NAME_LAPTOP, PRODUCT_SEARCH_LAPTOP } from '../helpers/product';
 
 /**
  * TC49 (positive) - Adding the same product to the cart twice, from two
@@ -11,20 +10,20 @@ const PRODUCT_NAME = '14.1-inch Laptop';
  */
 export async function TC49(page: Page) {
   await page.goto('/');
-  await searchForProduct(page, 'laptop');
-  await addProductToCartFromGrid(page, PRODUCT_NAME);
+  await searchForProduct(page, PRODUCT_SEARCH_LAPTOP);
+  await addProductToCartFromGrid(page, PRODUCT_NAME_LAPTOP);
 
   await page.goto('/');
-  await searchForProduct(page, 'laptop');
-  await addProductToCartFromGrid(page, PRODUCT_NAME);
+  await searchForProduct(page, PRODUCT_SEARCH_LAPTOP);
+  await addProductToCartFromGrid(page, PRODUCT_NAME_LAPTOP);
 
   expect(await getCartQuantityBadge(page)).toBe(2);
 
   await goToCartPage(page);
 
-  const matchingRows = page.locator(CART_ROW).filter({ hasText: PRODUCT_NAME });
+  const matchingRows = page.locator(CART_ROW).filter({ hasText: PRODUCT_NAME_LAPTOP });
   await expect(matchingRows).toHaveCount(1);
 
-  const quantity = await getCartItemQuantityValue(page, PRODUCT_NAME);
+  const quantity = await getCartItemQuantityValue(page, PRODUCT_NAME_LAPTOP);
   expect(quantity).toBe(2);
 }

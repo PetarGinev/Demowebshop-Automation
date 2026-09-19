@@ -14,9 +14,13 @@ export const PRODUCT_DETAILS_NAME = '.product-name h1';
 export const PRODUCT_DETAILS_PRICE = '.product-price';
 export const PRODUCT_DETAILS_QTY_INPUT = '.add-to-cart .qty-input';
 export const PRODUCT_DETAILS_ADD_TO_CART_BUTTON = '.add-to-cart-button';
-export const ADD_TO_CART_WARNING = '.add-to-cart-qty-warning, .field-validation-error';
+export const ADD_TO_CART_WARNING = '#bar-notification';
 export const BAR_NOTIFICATION_SUCCESS = '.bar-notification.success';
 export const PRODUCT_DETAILS_CONTAINER = 'div[class*="product-details-page"]';
+
+export const PRODUCT_NAME_FICTION = 'Fiction';
+export const PRODUCT_NAME_LAPTOP = '14.1-inch Laptop';
+export const PRODUCT_SEARCH_LAPTOP = 'laptop';
 
 /** Navigates home, then clicks a top-level category link by its visible name (e.g. "Books"). */
 export async function goToCategory(page: Page, categoryName: string) {
@@ -27,11 +31,13 @@ export async function goToCategory(page: Page, categoryName: string) {
 
 /** Returns all product names currently shown on a category or search-results page. */
 export async function getCategoryProductNames(page: Page) {
+  await page.locator(PRODUCT_ITEM_TITLE).first().waitFor({ state: 'visible' });
   return page.locator(PRODUCT_ITEM_TITLE).allTextContents();
 }
 
 /** Returns all product prices (as numbers) currently shown on a category page. */
 export async function getCategoryProductPrices(page: Page) {
+  await page.locator(PRODUCT_ITEM_PRICE).first().waitFor({ state: 'visible' });
   const priceTexts = await page.locator(PRODUCT_ITEM_PRICE).allTextContents();
   return priceTexts
     .map((text) => text.replace(/,/g, '').match(/[\d.]+/)?.[0])
@@ -66,7 +72,7 @@ function getProductItem(page: Page, productName: string): Locator {
 
 /** Clicks a product's title on a category/search listing page, opening its details page. */
 export async function openProductFromCategory(page: Page, productName: string) {
-  await getProductItem(page, productName).locator(PRODUCT_ITEM_TITLE).click();
+  await getProductItem(page, productName).locator(PRODUCT_ITEM_TITLE).first().click();
   await expect(page.locator(PRODUCT_DETAILS_NAME)).toBeVisible();
 }
 
@@ -92,5 +98,6 @@ export async function addToCartFromDetailsPage(page: Page) {
 
 /** Returns any add-to-cart validation/warning message shown on the product details page. */
 export async function getAddToCartWarning(page: Page) {
-  return page.locator(ADD_TO_CART_WARNING).first().textContent();
+  await expect(page.locator(ADD_TO_CART_WARNING)).toBeVisible();
+  return page.locator(ADD_TO_CART_WARNING).textContent();
 }

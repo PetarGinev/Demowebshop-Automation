@@ -2,8 +2,7 @@ import { Page, expect } from '@playwright/test';
 import { searchForProduct } from '../helpers/search';
 import { addProductToCartFromGrid, goToCartPage, acceptTermsOfService, clickCheckout } from '../helpers/cart';
 import { startGuestCheckout, fillBillingAddress, continueFromBillingAddress } from '../helpers/checkout';
-
-const PRODUCT_NAME = '14.1-inch Laptop';
+import { PRODUCT_NAME_LAPTOP, PRODUCT_SEARCH_LAPTOP } from '../helpers/product';
 
 /**
  * TC23 (positive) - As a guest, filling in a valid billing address and
@@ -12,8 +11,8 @@ const PRODUCT_NAME = '14.1-inch Laptop';
  */
 export async function TC23(page: Page) {
   await page.goto('/');
-  await searchForProduct(page, 'laptop');
-  await addProductToCartFromGrid(page, PRODUCT_NAME);
+  await searchForProduct(page, PRODUCT_SEARCH_LAPTOP);
+  await addProductToCartFromGrid(page, PRODUCT_NAME_LAPTOP);
   await goToCartPage(page);
   await acceptTermsOfService(page);
   await clickCheckout(page);
